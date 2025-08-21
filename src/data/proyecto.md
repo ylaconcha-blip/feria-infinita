@@ -1,5 +1,5 @@
 <div align="center">
-<img src="/assets/img/mapa_concepto.jpg" alt="Mapa Conceptual" style="max-width: 500px; width: 100%; height: auto;">
+<img src="https://lab-tecnosocial.github.io/feria-infinita/proyecto/assets/img/mapa_concepto.jpg" alt="Mapa Conceptual" style="max-width: 500px; width: 100%; height: auto;">
 </div>
 
 <br>
