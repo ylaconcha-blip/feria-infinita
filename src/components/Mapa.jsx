@@ -1,4 +1,5 @@
 import { MapContainer, TileLayer, useMap, ZoomControl } from 'react-leaflet';
+import { useState } from 'react';
 import MiMarker from './MiMarker';
 import SpiralLines from './SpiralLines';
 import CitySelector from './CitySelector';
@@ -14,7 +15,7 @@ var southAmericaBounds = L.latLngBounds(
 );
 
 export default function Mapa() {
-
+    const [isFormOpen, setIsFormOpen] = useState(false);
 
     return (
         <div style={{
@@ -23,7 +24,7 @@ export default function Mapa() {
             width: '100%'
         }} className="map-container">
             {/* Formulario lateral */}
-            <FormularioFeria />
+            <FormularioFeria onToggle={setIsFormOpen} />
 
             <MapContainer
                 center={[-8.700, -72.082]}
@@ -43,7 +44,7 @@ export default function Mapa() {
                 <SpiralLines />
 
                 {/* City Selector Component */}
-                <CitySelector />
+                <CitySelector isFormOpen={isFormOpen} />
 
                 {/* Original Markers */}
                 {data.map((item, index) => {

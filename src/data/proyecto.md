@@ -1,3 +1,15 @@
+<div align="center">
+<img src="public/assets/img/mapa_concepto.jpg" alt="Mapa Conceptual" style="max-width: 500px; width: 100%; height: auto;">
+</div>
+
+<br>
+
+<iframe width="100%" height="60px" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&mini=1&feed=%2Flaferiainfinita%2Fla-feria-infinita-demo%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;" ></iframe>
+
+<br>
+<br>
+
+
 La Feria Infinita es un mapa de monitoreo acústico, alojado en una web, que recorre las principales ferias del Abya Yala, generando el eje paisaje sonoro \- cartografía \- comercio (in)formal, tanto en espacios rurales como urbanos, a través de un ejercicio de escucha circular.
 
 Tomando como referencia el mapa de América de Juan Downey, nos situamos en la feria tripartita de Visviri / Charaña y como espiral en expansión, recorreremos los principales \- y más antiguos \- enclaves informales de comercio latinoamericanos.
@@ -36,4 +48,4 @@ Las ferias latinoamericanas encarnan la infinitud como principio de resistencia 
 
 La espiral de Downey visibiliza esta infinitud: cada vuelta de la espiral representa un ciclo de renovación, cada feria es un punto de inflexión donde convergen pasado y futuro, tradición y transformación.
 
-	
+

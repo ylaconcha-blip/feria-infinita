@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useMap } from 'react-leaflet';
 import { FormControl, Select, MenuItem, Box, Typography } from '@mui/material';
 import L from 'leaflet';
@@ -10,17 +10,30 @@ const CITIES = {
   'Arica': { center: [-18.460, -70.287], zoom: 10 }
 };
 
-export default function CitySelector() {
+export default function CitySelector({ isFormOpen = false }) {
   const [selectedCity, setSelectedCity] = useState('Todas');
+  const [isMobile, setIsMobile] = useState(false);
   const map = useMap();
+
+  // Detect mobile screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleCityChange = (event) => {
     const cityName = event.target.value;
     setSelectedCity(cityName);
-    
+
     if (CITIES[cityName] && map) {
       const { center, zoom } = CITIES[cityName];
-      
+
       // Use native flyTo with optimized settings for smooth animation
       map.flyTo(center, zoom, {
         duration: 1.5,           // Faster animation
@@ -31,28 +44,40 @@ export default function CitySelector() {
   };
 
   return (
-    <Box 
+    <Box
       className="city-selector-container"
       sx={{
         position: 'absolute',
-        top: 20,
-        right: 20,
-        zIndex: 1000,
+        top: { xs: 'unset', md: 20 },
+        bottom: { xs: 80, md: 'unset' },
+        right: { xs: 'unset', md: 20 },
+        left: { xs: 10, md: 'unset' },
+        zIndex: 999,
         backgroundColor: 'rgba(255, 255, 255, 0.95)',
         borderRadius: 2,
-        padding: 2,
+        padding: { xs: 1, md: 2 },
         boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-        minWidth: 200
+        minWidth: { xs: 160, md: 200 },
+        display: isMobile && isFormOpen ? 'none' : 'block'
       }}
     >
-      <Typography variant="subtitle2" sx={{ marginBottom: 1, color: '#512876', fontWeight: 'bold' }}>
+      <Typography
+        variant="subtitle2"
+        sx={{
+          marginBottom: 1,
+          color: '#512876',
+          fontWeight: 'bold',
+          fontSize: { xs: '0.75rem', md: '0.875rem' }
+        }}
+      >
         Seleccionar Ciudad
       </Typography>
-      <FormControl fullWidth size="small">
+      <FormControl fullWidth size={isMobile ? "small" : "small"}>
         <Select
           value={selectedCity}
           onChange={handleCityChange}
           sx={{
+            fontSize: { xs: '0.75rem', md: '0.875rem' },
             '& .MuiOutlinedInput-root': {
               '& fieldset': {
                 borderColor: '#512876',
@@ -64,12 +89,23 @@ export default function CitySelector() {
                 borderColor: '#4A90E2',
               },
             },
+            '& .MuiSelect-select': {
+              padding: { xs: '6px 8px', md: '8px 12px' }
+            }
           }}
         >
-          <MenuItem value="Todas">🌍 Todas las ciudades</MenuItem>
-          <MenuItem value="El Alto">🏔️ El Alto (La Paz)</MenuItem>
-          <MenuItem value="Cochabamba">🌄 Cochabamba</MenuItem>
-          <MenuItem value="Arica">🌊 Arica (Chile)</MenuItem>
+          <MenuItem value="Todas" sx={{ fontSize: { xs: '0.75rem', md: '0.875rem' } }}>
+            🌍 Todas las ciudades
+          </MenuItem>
+          <MenuItem value="El Alto" sx={{ fontSize: { xs: '0.75rem', md: '0.875rem' } }}>
+            🏔️ El Alto (La Paz)
+          </MenuItem>
+          <MenuItem value="Cochabamba" sx={{ fontSize: { xs: '0.75rem', md: '0.875rem' } }}>
+            🌄 Cochabamba
+          </MenuItem>
+          <MenuItem value="Arica" sx={{ fontSize: { xs: '0.75rem', md: '0.875rem' } }}>
+            🌊 Arica (Chile)
+          </MenuItem>
         </Select>
       </FormControl>
     </Box>

@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { Close as CloseIcon, Add as AddIcon } from '@mui/icons-material';
 
-export default function FormularioFeria() {
+export default function FormularioFeria({ onToggle }) {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     nombre: '',
@@ -35,10 +35,17 @@ export default function FormularioFeria() {
     console.log('Datos del formulario:', formData);
     // Aquí iría la lógica para agregar al mapa
     setIsOpen(false);
+    if (onToggle) {
+      onToggle(false);
+    }
   };
 
   const toggleForm = () => {
-    setIsOpen(!isOpen);
+    const newState = !isOpen;
+    setIsOpen(newState);
+    if (onToggle) {
+      onToggle(newState);
+    }
   };
 
   return (
@@ -46,22 +53,24 @@ export default function FormularioFeria() {
       {/* Botón Toggle */}
       <IconButton
         onClick={toggleForm}
+        className="formulario-toggle-btn"
         sx={{
           position: 'fixed',
-          left: isOpen ? '420px' : '20px',
-          top: '50%',
-          transform: 'translateY(-50%)',
+          left: { xs: 'unset', md: isOpen ? '420px' : '20px' },
+          right: { xs: '20px', md: 'unset' },
+          top: { xs: '20px', md: '50%' },
+          transform: { xs: 'none', md: 'translateY(-50%)' },
           zIndex: 1001,
           backgroundColor: '#512876',
           color: 'white',
           boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
           '&:hover': {
             backgroundColor: '#6B4C93',
-            transform: 'translateY(-50%) scale(1.1)',
+            transform: { xs: 'scale(1.1)', md: 'translateY(-50%) scale(1.1)' },
           },
           transition: 'all 0.3s ease',
-          width: 56,
-          height: 56
+          width: { xs: 48, md: 56 },
+          height: { xs: 48, md: 56 }
         }}
       >
         {isOpen ? <CloseIcon /> : <AddIcon />}
@@ -76,7 +85,8 @@ export default function FormularioFeria() {
             left: 0,
             top: 0,
             height: '100vh',
-            width: '400px',
+            width: { xs: '100%', md: '400px' },
+            maxWidth: { xs: '100vw', md: '400px' },
             zIndex: 1000,
             backgroundColor: 'white',
             boxShadow: '4px 0 20px rgba(0,0,0,0.15)',
