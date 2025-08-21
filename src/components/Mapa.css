@@ -195,9 +195,10 @@
     /* Ensure toggle button is always visible on mobile */
     .formulario-toggle-btn {
         position: fixed !important;
-        right: 20px !important;
-        left: unset !important;
-        top: 20px !important;
+        left: 20px !important;
+        right: unset !important;
+        top: unset !important;
+        bottom: 20px !important;
         transform: none !important;
         z-index: 1001 !important;
         width: 48px !important;
@@ -210,13 +211,13 @@
         max-width: 100vw !important;
     }
 
-    /* Reposition city selector on mobile - move to bottom left when form is closed */
+    /* Reposition city selector on mobile - move to top right */
     .city-selector-container {
         position: fixed !important;
-        top: unset !important;
-        bottom: 80px !important;
-        right: unset !important;
-        left: 10px !important;
+        top: 80px !important;
+        bottom: unset !important;
+        right: 20px !important;
+        left: unset !important;
         min-width: 160px !important;
         padding: 8px !important;
         font-size: 12px !important;
@@ -241,6 +242,23 @@
         width: 160px !important;
         font-size: 11px !important;
     }
+
+    /* Ensure hamburger menu is visible */
+    .header {
+        padding: 0.5rem 1rem !important;
+        min-height: 56px !important;
+    }
+
+    /* Make sure header elements don't interfere with map controls */
+    .MuiAppBar-root {
+        z-index: 1100 !important;
+    }
+
+    /* Hamburger menu button styling */
+    .MuiIconButton-root[aria-label="menu"] {
+        padding: 8px !important;
+        margin-left: 8px !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -249,8 +267,8 @@
     .formulario-toggle-btn {
         width: 44px !important;
         height: 44px !important;
-        right: 15px !important;
-        top: 15px !important;
+        left: 15px !important;
+        bottom: 15px !important;
     }
 
     /* Make city selector even smaller on very small screens */
@@ -258,8 +276,8 @@
         min-width: 140px !important;
         padding: 6px !important;
         font-size: 11px !important;
-        bottom: 70px !important;
-        left: 5px !important;
+        top: 70px !important;
+        right: 15px !important;
     }
 
     .map-legend {
@@ -272,5 +290,15 @@
     .tema-filter {
         top: 70px !important;
         right: 15px !important;
+    }
+
+    /* Header adjustments for very small screens */
+    .header {
+        padding: 0.25rem 0.5rem !important;
+        min-height: 48px !important;
+    }
+
+    .header h1 {
+        font-size: 1rem !important;
     }
 }

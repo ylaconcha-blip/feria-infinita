@@ -15,7 +15,7 @@ import { useTheme } from '@mui/material/styles';
 function Header() {
     const [anchorEl, setAnchorEl] = useState(null);
     const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const isMobile = useMediaQuery(theme.breakpoints.down('md')); // Cambiado de 'sm' a 'md' para incluir tablets
 
     const handleMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -44,18 +44,60 @@ function Header() {
                             color="inherit"
                             aria-label="menu"
                             onClick={handleMenuOpen}
+                            sx={{
+                                padding: '8px',
+                                marginLeft: '8px',
+                                '&:hover': {
+                                    backgroundColor: 'rgba(255,255,255,0.1)'
+                                }
+                            }}
                         >
-                            <MenuIcon />
+                            <MenuIcon sx={{ fontSize: '1.5rem' }} />
                         </IconButton>
                         <Menu
                             anchorEl={anchorEl}
                             open={Boolean(anchorEl)}
                             onClose={handleMenuClose}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'right',
+                            }}
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            sx={{
+                                '& .MuiPaper-root': {
+                                    backgroundColor: '#512876',
+                                    color: 'white',
+                                    minWidth: '150px'
+                                }
+                            }}
                         >
-                            <MenuItem onClick={handleMenuClose} component={NavLink} to="/">
+                            <MenuItem
+                                onClick={handleMenuClose}
+                                component={NavLink}
+                                to="/"
+                                sx={{
+                                    color: 'white',
+                                    '&:hover': {
+                                        backgroundColor: 'rgba(255,255,255,0.1)'
+                                    }
+                                }}
+                            >
                                 Mapa
                             </MenuItem>
-                            <MenuItem onClick={handleMenuClose} component={NavLink} to="/proyecto">
+                            <MenuItem
+                                onClick={handleMenuClose}
+                                component={NavLink}
+                                to="/proyecto"
+                                sx={{
+                                    color: 'white',
+                                    '&:hover': {
+                                        backgroundColor: 'rgba(255,255,255,0.1)'
+                                    }
+                                }}
+                            >
                                 El proyecto
                             </MenuItem>
                         </Menu>

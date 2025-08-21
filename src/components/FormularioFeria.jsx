@@ -56,9 +56,10 @@ export default function FormularioFeria({ onToggle }) {
         className="formulario-toggle-btn"
         sx={{
           position: 'fixed',
-          left: { xs: 'unset', md: isOpen ? '420px' : '20px' },
-          right: { xs: '20px', md: 'unset' },
-          top: { xs: '20px', md: '50%' },
+          left: { xs: '20px', md: isOpen ? '420px' : '20px' },
+          right: { xs: 'unset', md: 'unset' },
+          top: { xs: 'unset', md: '50%' },
+          bottom: { xs: '20px', md: 'unset' },
           transform: { xs: 'none', md: 'translateY(-50%)' },
           zIndex: 1001,
           backgroundColor: '#512876',

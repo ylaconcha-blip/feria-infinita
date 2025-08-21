@@ -48,10 +48,10 @@ export default function CitySelector({ isFormOpen = false }) {
       className="city-selector-container"
       sx={{
         position: 'absolute',
-        top: { xs: 'unset', md: 20 },
-        bottom: { xs: 80, md: 'unset' },
-        right: { xs: 'unset', md: 20 },
-        left: { xs: 10, md: 'unset' },
+        top: { xs: 20, md: 20 },
+        bottom: { xs: 'unset', md: 'unset' },
+        right: { xs: 20, md: 20 },
+        left: { xs: 'unset', md: 'unset' },
         zIndex: 999,
         backgroundColor: 'rgba(255, 255, 255, 0.95)',
         borderRadius: 2,
