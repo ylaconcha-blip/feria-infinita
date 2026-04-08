@@ -49,8 +49,9 @@ useEffect(() => {
                 zoomControl={false}
             >
                 <TileLayer
-                    url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png"
-                />
+  url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+  attribution='© Stadia Maps © OpenStreetMap'
+/>
 
                 {/* Spiral Lines Component */}
                 <SpiralLines />

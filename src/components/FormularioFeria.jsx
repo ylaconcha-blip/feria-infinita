@@ -138,18 +138,18 @@ export default function FormularioFeria({ onToggle }) {
       <IconButton
         onClick={toggleForm}
         sx={{
-          position: 'fixed',
-          left: { xs: '20px', md: isOpen ? '420px' : '20px' },
-          top: { xs: 'unset', md: '50%' },
-          bottom: { xs: '20px', md: 'unset' },
-          transform: { xs: 'none', md: 'translateY(-50%)' },
-          zIndex: 1001,
-          backgroundColor: '#512876',
-          color: 'white',
-          '&:hover': { backgroundColor: '#6B4C93' },
-          width: { xs: 48, md: 56 },
-          height: { xs: 48, md: 56 }
-        }}
+   position: 'fixed',
+  left: { xs: '20px', md: isOpen ? '420px' : '20px' },
+  top: { xs: 'unset', md: '50%' },
+  bottom: { xs: '20px', md: 'unset' },
+  transform: { xs: 'none', md: 'translateY(-50%)' },
+  zIndex: 1001,
+  backgroundColor: 'var(--acento)',
+  color: 'var(--fondo)',
+  '&:hover': { backgroundColor: '#a8d420' },
+  width: { xs: 48, md: 56 },
+  height: { xs: 48, md: 56 }
+}}
       >
         {isOpen ? <CloseIcon /> : <AddIcon />}
       </IconButton>
@@ -157,8 +157,11 @@ export default function FormularioFeria({ onToggle }) {
       <Slide direction="right" in={isOpen} mountOnEnter unmountOnExit>
         <Paper sx={{
           position: 'fixed', left: 0, top: 0,
-          height: '100vh', width: { xs: '100%', md: '400px' },
-          zIndex: 1000, overflowY: 'auto', display: 'flex', flexDirection: 'column'
+  height: '100vh', width: { xs: '100%', md: '400px' },
+  zIndex: 1000, overflowY: 'auto', display: 'flex', flexDirection: 'column',
+  background: 'var(--panel)',
+  borderRight: '1px solid var(--borde-hover)',
+  borderRadius: 0,
         }}>
           <Box sx={{ padding: 3, flexGrow: 1 }}>
             <Typography variant="h6" sx={{ marginBottom: 3, color: '#512876', fontWeight: 'bold' }}>
@@ -242,9 +245,13 @@ export default function FormularioFeria({ onToggle }) {
 
             <Button fullWidth onClick={handleSubmit}
               sx={{
-                backgroundColor: '#512876', color: 'white',
-                py: 1.5, fontWeight: 'bold',
-                '&:hover': { backgroundColor: '#6B4C93' }
+                backgroundColor: 'var(--acento)',
+  color: 'var(--fondo)',
+  py: 1.5, fontWeight: 'bold',
+  fontFamily: 'Space Mono, monospace',
+  fontSize: '11px', letterSpacing: '0.15em',
+  borderRadius: '2px',
+  '&:hover': { backgroundColor: '#a8d420' }
               }}
             >
               Agregar al mapa →

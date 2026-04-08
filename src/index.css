@@ -1,6 +1,62 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Montserrat', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Fraunces:ital,wght@0,300;0,600;1,300&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
+:root {
+  --acento: #C8F535;
+  --azul: #1E90FF;
+  --naranja: #FF5E1A;
+  --oro: #FFD700;
+  --texto: #EEF5D8;
+  --texto-muted: rgba(238,245,216,0.45);
+  --fondo: #0C0F08;
+  --panel: #161A10;
+  --panel2: #1C2114;
+  --borde: rgba(200,245,53,0.15);
+  --borde-hover: rgba(200,245,53,0.35);
+}
+
+body {
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: 'Space Mono', monospace;
+  height: 100vh;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--panel); }
+::-webkit-scrollbar-thumb { background: var(--acento); border-radius: 2px; }
+
+.leaflet-container { background: var(--fondo); }
+.leaflet-tile { filter: sepia(0.15) saturate(0.9) brightness(0.88) hue-rotate(20deg); }
+
+.leaflet-control-zoom a {
+  background: var(--fondo) !important;
+  color: var(--texto) !important;
+  border-color: var(--borde-hover) !important;
+  font-family: 'Space Mono', monospace !important;
+}
+.leaflet-control-zoom a:hover {
+  background: var(--acento) !important;
+  color: var(--fondo) !important;
+}
+.leaflet-control-attribution {
+  background: rgba(12,15,8,0.75) !important;
+  color: rgba(238,245,216,0.25) !important;
+  font-size: 9px !important;
+}
+.leaflet-popup-content-wrapper {
+  background: var(--panel);
+  border: 1px solid var(--borde-hover);
+  border-radius: 4px;
+  color: var(--texto);
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+}
+.leaflet-popup-tip { background: var(--panel); }
+.leaflet-popup-close-button { color: var(--acento) !important; }

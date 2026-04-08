@@ -1,132 +1,83 @@
-import React, { useState } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import MenuIcon from '@mui/icons-material/Menu';
+import { useState } from 'react';
 import { NavLink } from 'react-router';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
 
 function Header() {
-    const [anchorEl, setAnchorEl] = useState(null);
-    const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('md')); // Cambiado de 'sm' a 'md' para incluir tablets
+  const [menuOpen, setMenuOpen] = useState(false);
 
-    const handleMenuOpen = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
+  return (
+    <div style={{
+      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1100,
+      height: '52px',
+      background: 'var(--fondo)',
+      borderBottom: '1px solid var(--borde-hover)',
+      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+      padding: '0 20px',
+    }}>
+      <NavLink to="/" style={{ textDecoration: 'none' }}>
+        <div style={{
+          fontFamily: 'Bungee, sans-serif',
+          fontSize: '15px', letterSpacing: '0.08em',
+          color: 'var(--texto)',
+        }}>
+          LA <span style={{ color: 'var(--acento)' }}>FERIA</span> INFINITA
+        </div>
+      </NavLink>
 
-    const handleMenuClose = () => {
-        setAnchorEl(null);
-    };
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{
+          fontSize: '9px', letterSpacing: '0.2em', textTransform: 'uppercase',
+          color: 'var(--texto-muted)',
+        }}>
+          Mapa Sonoro · Abya Yala
+        </div>
 
-    return (
-        <AppBar position="static">
-            <Toolbar className="header" sx={{ justifyContent: 'space-between' }}>
-                {/* Barras verticales */}
-                <Box sx={{ display: 'flex', height: '100%', alignItems: 'stretch' }}>
-                    <Box sx={{ width: 24, backgroundColor: '#B3D8E6' }} />
-                    <Box sx={{ width: 24, backgroundColor: '#7BA6C9' }} />
-                    <Box sx={{ width: 24, backgroundColor: '#5C8DB8' }} />
-                </Box>
-                <Typography variant="h1" color="inherit" sx={{ fontSize: isMobile ? '1.2rem' : '1.5rem' }}>
-                    La feria infinita
-                </Typography>
-                {isMobile ? (
-                    <>
-                        <IconButton
-                            edge="start"
-                            color="inherit"
-                            aria-label="menu"
-                            onClick={handleMenuOpen}
-                            sx={{
-                                padding: '8px',
-                                marginLeft: '8px',
-                                '&:hover': {
-                                    backgroundColor: 'rgba(255,255,255,0.1)'
-                                }
-                            }}
-                        >
-                            <MenuIcon sx={{ fontSize: '1.5rem' }} />
-                        </IconButton>
-                        <Menu
-                            anchorEl={anchorEl}
-                            open={Boolean(anchorEl)}
-                            onClose={handleMenuClose}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'right',
-                            }}
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            sx={{
-                                '& .MuiPaper-root': {
-                                    backgroundColor: '#512876',
-                                    color: 'white',
-                                    minWidth: '150px'
-                                }
-                            }}
-                        >
-                            <MenuItem
-                                onClick={handleMenuClose}
-                                component={NavLink}
-                                to="/"
-                                sx={{
-                                    color: 'white',
-                                    '&:hover': {
-                                        backgroundColor: 'rgba(255,255,255,0.1)'
-                                    }
-                                }}
-                            >
-                                Mapa
-                            </MenuItem>
-                            <MenuItem
-                                onClick={handleMenuClose}
-                                component={NavLink}
-                                to="/proyecto"
-                                sx={{
-                                    color: 'white',
-                                    '&:hover': {
-                                        backgroundColor: 'rgba(255,255,255,0.1)'
-                                    }
-                                }}
-                            >
-                                El proyecto
-                            </MenuItem>
-                        </Menu>
-                    </>
-                ) : (
-                    <Box>
-                        <Button
-                            color="inherit"
-                            size="large"
-                            component={NavLink}
-                            to="/"
-                            style={{ textDecoration: 'none', color: 'inherit' }}
-                        >
-                            Mapa
-                        </Button>
-                        <Button
-                            color="inherit"
-                            size="large"
-                            component={NavLink}
-                            to="/proyecto"
-                            style={{ textDecoration: 'none', color: 'inherit' }}
-                        >
-                            El proyecto
-                        </Button>
-                    </Box>
-                )}
-            </Toolbar>
-        </AppBar>
-    );
+        <NavLink to="/" style={{ textDecoration: 'none' }}>
+          <div style={{
+            fontSize: '9px', letterSpacing: '0.15em', textTransform: 'uppercase',
+            color: 'var(--texto-muted)', padding: '5px 10px', cursor: 'pointer',
+          }}
+            onMouseEnter={e => e.target.style.color = 'var(--texto)'}
+            onMouseLeave={e => e.target.style.color = 'var(--texto-muted)'}
+          >
+            Mapa
+          </div>
+        </NavLink>
+
+        <NavLink to="/proyecto" style={{ textDecoration: 'none' }}>
+          <div style={{
+            fontSize: '9px', letterSpacing: '0.15em', textTransform: 'uppercase',
+            color: 'var(--texto-muted)', padding: '5px 10px', cursor: 'pointer',
+          }}
+            onMouseEnter={e => e.target.style.color = 'var(--texto)'}
+            onMouseLeave={e => e.target.style.color = 'var(--texto-muted)'}
+          >
+            El proyecto
+          </div>
+        </NavLink>
+
+ <NavLink to="/contribuir" style={{ textDecoration: 'none' }}>
+  <div style={{
+    fontSize: '9px', letterSpacing: '0.15em', textTransform: 'uppercase',
+    color: 'var(--acento)',
+    border: '1px solid rgba(200,245,53,0.4)',
+    padding: '5px 12px', cursor: 'pointer',
+    transition: 'background 0.2s',
+  }}
+    onMouseEnter={e => {
+      e.currentTarget.style.background = 'var(--acento)';
+      e.currentTarget.style.color = 'var(--fondo)';
+    }}
+    onMouseLeave={e => {
+      e.currentTarget.style.background = 'transparent';
+      e.currentTarget.style.color = 'var(--acento)';
+    }}
+  >
+    + Contribuir
+  </div>
+</NavLink>
+      </div>
+    </div>
+  );
 }
 
 export default Header;

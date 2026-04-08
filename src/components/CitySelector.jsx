@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useMap } from 'react-leaflet';
-import { FormControl, Select, MenuItem, Box, Typography } from '@mui/material';
-import L from 'leaflet';
 
 const CITIES = {
-  'Todas': { center: [-17.5, -68.5], zoom: 5 },
-  'El Alto': { center: [-16.495, -68.169], zoom: 10 },
-  'Cochabamba': { center: [-17.404, -66.153], zoom: 10 },
-  'Arica': { center: [-18.460, -70.287], zoom: 10 }
+  'Todas':       { center: [-17.5, -68.5], zoom: 5 },
+  'El Alto':     { center: [-16.495, -68.169], zoom: 10 },
+  'Cochabamba':  { center: [-17.404, -66.153], zoom: 10 },
+  'Arica':       { center: [-18.460, -70.287], zoom: 10 }
 };
 
 export default function CitySelector({ isFormOpen = false }) {
@@ -15,99 +13,69 @@ export default function CitySelector({ isFormOpen = false }) {
   const [isMobile, setIsMobile] = useState(false);
   const map = useMap();
 
-  // Detect mobile screen size
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-
-    return () => window.removeEventListener('resize', checkMobile);
+    const check = () => setIsMobile(window.innerWidth <= 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
   }, []);
 
-  const handleCityChange = (event) => {
-    const cityName = event.target.value;
-    setSelectedCity(cityName);
-
-    if (CITIES[cityName] && map) {
-      const { center, zoom } = CITIES[cityName];
-
-      // Use native flyTo with optimized settings for smooth animation
-      map.flyTo(center, zoom, {
-        duration: 1.5,           // Faster animation
-        easeLinearity: 0.15,     // Smoother easing
-        noMoveStart: true        // Prevents interruptions
+  const handleCityChange = (e) => {
+    const city = e.target.value;
+    setSelectedCity(city);
+    if (CITIES[city] && map) {
+      map.flyTo(CITIES[city].center, CITIES[city].zoom, {
+        duration: 1.5, easeLinearity: 0.15, noMoveStart: true
       });
     }
   };
 
+  if (isMobile && isFormOpen) return null;
+
   return (
-    <Box
-      className="city-selector-container"
-      sx={{
-        position: 'absolute',
-        top: { xs: 20, md: 20 },
-        bottom: { xs: 'unset', md: 'unset' },
-        right: { xs: 20, md: 20 },
-        left: { xs: 'unset', md: 'unset' },
-        zIndex: 999,
-        backgroundColor: 'rgba(255, 255, 255, 0.95)',
-        borderRadius: 2,
-        padding: { xs: 1, md: 2 },
-        boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-        minWidth: { xs: 160, md: 200 },
-        display: isMobile && isFormOpen ? 'none' : 'block'
-      }}
-    >
-      <Typography
-        variant="subtitle2"
-        sx={{
-          marginBottom: 1,
-          color: '#512876',
-          fontWeight: 'bold',
-          fontSize: { xs: '0.75rem', md: '0.875rem' }
+    <div style={{
+      position: 'absolute',
+      top: 20, right: 20,
+      zIndex: 999,
+      background: 'var(--panel)',
+      border: '1px solid var(--borde-hover)',
+      borderRadius: '3px',
+      padding: '12px 14px',
+      minWidth: '180px',
+    }}>
+      <div style={{
+        fontSize: '9px', letterSpacing: '0.2em', textTransform: 'uppercase',
+        color: 'var(--acento)', marginBottom: '10px',
+      }}>
+        Seleccionar ciudad
+      </div>
+      <select
+        value={selectedCity}
+        onChange={handleCityChange}
+        style={{
+          width: '100%',
+          background: 'var(--panel2)',
+          border: '1px solid var(--borde-hover)',
+          color: 'var(--texto)',
+          fontFamily: 'Space Mono, monospace',
+          fontSize: '11px',
+          padding: '7px 10px',
+          borderRadius: '2px',
+          cursor: 'pointer',
+          outline: 'none',
+          appearance: 'none',
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3E%3Cpath d='M0 0l5 7 5-7z' fill='%23C8F535'/%3E%3C/svg%3E")`,
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'right 10px center',
+          paddingRight: '28px',
         }}
       >
-        Seleccionar Ciudad
-      </Typography>
-      <FormControl fullWidth size={isMobile ? "small" : "small"}>
-        <Select
-          value={selectedCity}
-          onChange={handleCityChange}
-          sx={{
-            fontSize: { xs: '0.75rem', md: '0.875rem' },
-            '& .MuiOutlinedInput-root': {
-              '& fieldset': {
-                borderColor: '#512876',
-              },
-              '&:hover fieldset': {
-                borderColor: '#7ED321',
-              },
-              '&.Mui-focused fieldset': {
-                borderColor: '#4A90E2',
-              },
-            },
-            '& .MuiSelect-select': {
-              padding: { xs: '6px 8px', md: '8px 12px' }
-            }
-          }}
-        >
-          <MenuItem value="Todas" sx={{ fontSize: { xs: '0.75rem', md: '0.875rem' } }}>
-            🌍 Todas las ciudades
-          </MenuItem>
-          <MenuItem value="El Alto" sx={{ fontSize: { xs: '0.75rem', md: '0.875rem' } }}>
-            🏔️ El Alto (La Paz)
-          </MenuItem>
-          <MenuItem value="Cochabamba" sx={{ fontSize: { xs: '0.75rem', md: '0.875rem' } }}>
-            🌄 Cochabamba
-          </MenuItem>
-          <MenuItem value="Arica" sx={{ fontSize: { xs: '0.75rem', md: '0.875rem' } }}>
-            🌊 Arica (Chile)
-          </MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
+        {Object.keys(CITIES).map(city => (
+          <option key={city} value={city} style={{ background: '#1C2114' }}>
+            {city === 'Todas' ? 'Todas las ciudades' : city}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 }
