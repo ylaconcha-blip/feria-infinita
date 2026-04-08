@@ -7,7 +7,9 @@ export default function MiMarker({ item }) {
 
 
 
-    const coords = item.coordenadas.split(', ');
+    const coords = Array.isArray(item.coordenadas)
+  ? item.coordenadas
+  : item.coordenadas.split(', ').map(Number);
 
     return (
         <>

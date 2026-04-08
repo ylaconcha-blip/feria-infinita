@@ -1,10 +1,10 @@
 import { MapContainer, TileLayer, useMap, ZoomControl } from 'react-leaflet';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { supabase } from '../supabase';
 import MiMarker from './MiMarker';
 import SpiralLines from './SpiralLines';
 import CitySelector from './CitySelector';
 import FormularioFeria from './FormularioFeria';
-import data from '../data/datos.json';
 import './Mapa.css';
 import L from 'leaflet';
 
@@ -16,6 +16,18 @@ var southAmericaBounds = L.latLngBounds(
 
 export default function Mapa() {
     const [isFormOpen, setIsFormOpen] = useState(false);
+
+    const [data, setData] = useState([]);
+
+useEffect(() => {
+  supabase
+    .from('mapa_ferias')
+    .select('*')
+    .then(({ data: ferias, error }) => {
+      if (error) console.error(error);
+      else setData(ferias);
+    });
+}, []);
 
     return (
         <div style={{
