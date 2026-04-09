@@ -32,7 +32,6 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--acento); border-radius: 2px; }
 
 .leaflet-container { background: var(--fondo); }
-.leaflet-tile { filter: sepia(0.15) saturate(0.9) brightness(0.88) hue-rotate(20deg); }
 
 .leaflet-control-zoom a {
   background: var(--fondo) !important;

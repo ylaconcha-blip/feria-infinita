@@ -36,10 +36,11 @@ export default function Mapa() {
         style={{ height: '100%', width: '100%' }}
         zoomControl={false}
       >
-       <TileLayer
-  url="https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png"
-  attribution='© Stadia Maps © OpenStreetMap'
+<TileLayer
+  url="https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png"
+  attribution='Map tiles by Stamen Design, CC BY 3.0'
 />
+
         <SpiralLines />
         <CitySelector isFormOpen={isFormOpen} />
         {data.map((item, index) => (
