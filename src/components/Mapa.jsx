@@ -37,8 +37,8 @@ export default function Mapa() {
         zoomControl={false}
       >
 <TileLayer
-  url="https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png"
-  attribution='Map tiles by Stamen Design, CC BY 3.0'
+  url="https://api.maptiler.com/maps/darkmatter/{z}/{x}/{y}.png?key=lmlk6XPIfLVg4GXasvel"
+  attribution='© MapTiler © OpenStreetMap'
 />
 
         <SpiralLines />
